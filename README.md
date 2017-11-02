@@ -7,7 +7,7 @@ This Spring Boot application has been developed as per the specification on http
 # Installation
 
 ```bash
-git clone
+git clone https://github.com/dcalde/ag_demo.git
 
 export DB_HOST=localhost
 
