@@ -19,7 +19,19 @@ store such as credstash, vault, KMS. If Docker is chosen for deployment, it woul
 however, this role should only be granted data modification and usage right, not the permission to execute any DDL.
 * Use development / production Spring profiles
 
+# Comments about the test specifications
 
+* The validateBrackets endpoint http://join.autogeneral.com.au/swagger-ui/?url=/swagger.json#/tasks/get_tasks_validateBrackets 
+states that the input string has a max length of 50, but this isn't actually validated. My implementation does validate it.
+* The structure of the error response objects is inconsistent
+* If you are using a global error response object ensure that it is named appropriately. The API specifies that the tasks/validateBrackets endpoint
+returns an instance of `ToDoItemValidationError` for 400 errors
+* I find using different response error object hard to use from a API client point of view as it requires testing the response 
+code first to then appropriately deserialise the error response. 
+I recommend no response body for non 2xx response and return an any errors via the response headers, see my implementation 
+for `join.ag.demo.controller.ToDoController.retrieveItemById` and `join.ag.demo.controller.TaskController.handleConstraintViolationException`
+* Overall this test is aimed at Software developers and not TechLead / Architect roles, as there are no requirements regarding
+ security, deployment, architecture etc.
 
 # Installation
 
